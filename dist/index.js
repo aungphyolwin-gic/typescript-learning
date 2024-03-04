@@ -47,4 +47,3 @@ let Person = {
 Person.age = 28;
 const age = Person.age;
 console.log(Person);
-console.log(age);
