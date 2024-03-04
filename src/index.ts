@@ -1,26 +1,25 @@
-// Any Type
+//---------------------------
+//Tuples
+//----------------------
+let person: [string, number, boolean] = ['marco', 22,true ]
 
-let variable: any
-let anotherVariable 
+// tuples example
+let hsla: [number, string, string, number] 
+hsla = [200, "100%", "100%", 1]
 
-variable = 'hello';
-variable = 27;
+let xy: [number, number]
+xy = [89.2, 20.1]
 
-anotherVariable = true;
-anotherVariable = { name: 'hello', age: 22}
-
-//any type in array
-const array1: any[] = ['hi', 12, true, null]
-array1.push({gender:'male'})
-
-
-//function
-function addTwoValue(data: any):any{
-    return data+data;
+function useCoord(): [number, number] {
+    //get Coordinate
+    const lat = 189
+    const long = 23
+    return [lat, long]
 }
 
-console.log(addTwoValue(2));
-console.log(addTwoValue("hI"));
+const [lat, long] = useCoord();
 
-//useful when migrating js to ts
-//using any won't cause any errors initially
+//name tuples
+let user: [name:string, age:number]
+user = ['Aung', 23]
+let nam =user[0]

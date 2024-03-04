@@ -1,19 +1,21 @@
 "use strict";
-// Any Type
-let variable;
-let anotherVariable;
-variable = 'hello';
-variable = 27;
-anotherVariable = true;
-anotherVariable = { name: 'hello', age: 22 };
-//any type in array
-const array1 = ['hi', 12, true, null];
-array1.push({ gender: 'male' });
-//function
-function addTwoValue(data) {
-    return data + data;
+//---------------------------
+//Tuples
+//----------------------
+let person = ['marco', 22, true];
+// tuples example
+let hsla;
+hsla = [200, "100%", "100%", 1];
+let xy;
+xy = [89.2, 20.1];
+function useCoord() {
+    //get Coordinate
+    const lat = 189;
+    const long = 23;
+    return [lat, long];
 }
-console.log(addTwoValue(2));
-console.log(addTwoValue("hI"));
-//useful when migrating js to ts
-//using any won't cause any errors initially
+const [lat, long] = useCoord();
+//name tuples
+let user;
+user = ['Aung', 23];
+let nam = user[0];
