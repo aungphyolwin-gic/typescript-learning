@@ -1,25 +1,36 @@
-//---------------------------
-//Tuples
-//----------------------
-let person: [string, number, boolean] = ['marco', 22,true ]
+//interfaces
 
-// tuples example
-let hsla: [number, string, string, number] 
-hsla = [200, "100%", "100%", 1]
-
-let xy: [number, number]
-xy = [89.2, 20.1]
-
-function useCoord(): [number, number] {
-    //get Coordinate
-    const lat = 189
-    const long = 23
-    return [lat, long]
+interface Author{
+    name: string
+    avarter: string
 }
 
-const [lat, long] = useCoord();
+const authorOne: Author = {name:"Aung Aung", avarter:"./img/avartar1.png"}
 
-//name tuples
-let user: [name:string, age:number]
-user = ['Aung', 23]
-let nam =user[0]
+interface Post {
+    title: string
+    body: string
+    tags: string[]
+    create_At: Date
+    author: Author
+}
+
+const newPost: Post = {
+    title: 'my first post',
+    body: 'this is the post interesting',
+    tags: ['gaming','tech'],
+    create_At: new Date(),
+    author: authorOne,
+}
+
+//as function argument types
+function createPost(post: Post): void{
+    console.log(`Create post ${post.title} by ${post.author.name}`);
+    
+}
+
+createPost(newPost);
+
+//with array
+const posts: Post[] = []
+posts.push(newPost)
