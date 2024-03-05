@@ -1,65 +1,40 @@
-//-----------------------
-// Union Type
-//-----------------------
+//---------------
+// Class
+//---------------
 
-let someId: number | string
-
-someId = 23
-someId = 'h23a3'
-
-let email: string | null
-
-email = 'aung@gmail.com'
-email = null
-
-type Id = number | string
-
-let anotherId : Id
-anotherId = 'lsdf2j4f'
-anotherId = 4
-
-
-//pitfall : cann't use union type to a method that require specifically only one data type
-//parseInt(anotherId)
-
-
-//----------------
-// Type Guard
-//----------------
-
-function swapIdType(id: Id){
-    if( typeof id === 'string'){
-        return parseInt(id);
+class Employee{
+    protected employeeName: string
+    salary?: number
+    constructor(name: string, salary?: number){
+        this.employeeName = name
+        this.salary = salary
     }
-    return id.toString();
-}
 
-console.log(swapIdType(23));
-console.log(swapIdType('3'));
-
-//types with Interfaces
-
-interface User {
-    type : 'user'
-    username : string
-    email : string
-    id : Id
-}
-
-interface Person {
-    type : 'person'
-    firstName : string
-    age : number
-    id : Id
-}
-
-function logDetails ( value : User | Person): void{
-    if( value.type === 'user'){
-        console.log(value.email, value.username);
-        
+    greet (): void  {
+        console.log("Good Morning " + this.employeeName);
     }
-    if(value.type === 'person'){
-        console.log(value.firstName, value.age);
+
+}
+
+let employee1 = new Employee("John",2000)
+// console.log(employee1.employeeName);
+employee1.greet();
+
+
+
+class Manager extends Employee {
+    constructor(managerName: string){
+        super(managerName);
+    }
+
+    delegateWork(){
+        console.log('Manager delegating work by ' + this.employeeName ); //can't access on private
         
     }
 }
+
+let manager1 = new Manager("Mike");
+
+manager1.delegateWork()
+manager1.greet();
+// console.log(manager1.employeeName);

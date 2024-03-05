@@ -1,34 +1,28 @@
 "use strict";
-//-----------------------
-// Union Type
-//-----------------------
-let someId;
-someId = 23;
-someId = 'h23a3';
-let email;
-email = 'aung@gmail.com';
-email = null;
-let anotherId;
-anotherId = 'lsdf2j4f';
-anotherId = 4;
-//pitfall : cann't use union type to a method that require specifically only one data type
-//parseInt(anotherId)
-//----------------
-// Type Guard
-//----------------
-function swapIdType(id) {
-    if (typeof id === 'string') {
-        return parseInt(id);
+//---------------
+// Class
+//---------------
+class Employee {
+    constructor(name, salary) {
+        this.employeeName = name;
+        this.salary = salary;
     }
-    return id.toString();
-}
-console.log(swapIdType(23));
-console.log(swapIdType('3'));
-function logDetails(value) {
-    if (value.type === 'user') {
-        console.log(value.email, value.username);
-    }
-    if (value.type === 'person') {
-        console.log(value.firstName, value.age);
+    greet() {
+        console.log("Good Morning " + this.employeeName);
     }
 }
+let employee1 = new Employee("John", 2000);
+// console.log(employee1.employeeName);
+employee1.greet();
+class Manager extends Employee {
+    constructor(managerName) {
+        super(managerName);
+    }
+    delegateWork() {
+        console.log('Manager delegating work by ' + this.employeeName); //can't access on private
+    }
+}
+let manager1 = new Manager("Mike");
+manager1.delegateWork();
+manager1.greet();
+// console.log(manager1.employeeName);
