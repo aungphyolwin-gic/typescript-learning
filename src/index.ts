@@ -1,34 +1,65 @@
-//-------------------
-// Type Alias
-//-------------------
+//-----------------------
+// Union Type
+//-----------------------
 
-//example 1 - tuple
-type rgb = [number, number, number]
+let someId: number | string
 
-function getRandomColor(): rgb {
-    const r = Math.floor( Math.random() * 255);
-    const g = Math.floor( Math.random() * 255);
-    const b = Math.floor( Math.random() * 255);
+someId = 23
+someId = 'h23a3'
 
-    return [r,g,b]
+let email: string | null
+
+email = 'aung@gmail.com'
+email = null
+
+type Id = number | string
+
+let anotherId : Id
+anotherId = 'lsdf2j4f'
+anotherId = 4
+
+
+//pitfall : cann't use union type to a method that require specifically only one data type
+//parseInt(anotherId)
+
+
+//----------------
+// Type Guard
+//----------------
+
+function swapIdType(id: Id){
+    if( typeof id === 'string'){
+        return parseInt(id);
+    }
+    return id.toString();
 }
 
-const getColorOne = getRandomColor();
-const getColorTwo = getRandomColor();
-console.log(getColorOne, getColorTwo);
+console.log(swapIdType(23));
+console.log(swapIdType('3'));
 
-//example 2 -> object literal
+//types with Interfaces
 
-type User = {
-    name : string
-    score: number
+interface User {
+    type : 'user'
+    username : string
+    email : string
+    id : Id
 }
 
-const userOne: User = { name:'Aung', score:95}
-
-function formatUser(user:User) :void {
-    console.log(`${user.name} has score of ${user.score}`);
+interface Person {
+    type : 'person'
+    firstName : string
+    age : number
+    id : Id
 }
 
-formatUser(userOne)
-formatUser({name:"Mike",score:80})
+function logDetails ( value : User | Person): void{
+    if( value.type === 'user'){
+        console.log(value.email, value.username);
+        
+    }
+    if(value.type === 'person'){
+        console.log(value.firstName, value.age);
+        
+    }
+}

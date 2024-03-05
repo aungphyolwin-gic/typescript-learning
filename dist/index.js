@@ -1,19 +1,34 @@
 "use strict";
-//-------------------
-// Type Alias
-//-------------------
-function getRandomColor() {
-    const r = Math.floor(Math.random() * 255);
-    const g = Math.floor(Math.random() * 255);
-    const b = Math.floor(Math.random() * 255);
-    return [r, g, b];
+//-----------------------
+// Union Type
+//-----------------------
+let someId;
+someId = 23;
+someId = 'h23a3';
+let email;
+email = 'aung@gmail.com';
+email = null;
+let anotherId;
+anotherId = 'lsdf2j4f';
+anotherId = 4;
+//pitfall : cann't use union type to a method that require specifically only one data type
+//parseInt(anotherId)
+//----------------
+// Type Guard
+//----------------
+function swapIdType(id) {
+    if (typeof id === 'string') {
+        return parseInt(id);
+    }
+    return id.toString();
 }
-const getColorOne = getRandomColor();
-const getColorTwo = getRandomColor();
-console.log(getColorOne, getColorTwo);
-const userOne = { name: 'Aung', score: 95 };
-function formatUser(user) {
-    console.log(`${user.name} has score of ${user.score}`);
+console.log(swapIdType(23));
+console.log(swapIdType('3'));
+function logDetails(value) {
+    if (value.type === 'user') {
+        console.log(value.email, value.username);
+    }
+    if (value.type === 'person') {
+        console.log(value.firstName, value.age);
+    }
 }
-formatUser(userOne);
-formatUser({ name: "Mike", score: 80 });
