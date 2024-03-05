@@ -1,36 +1,34 @@
-//interfaces
+//-------------------
+// Type Alias
+//-------------------
 
-interface Author{
-    name: string
-    avarter: string
+//example 1 - tuple
+type rgb = [number, number, number]
+
+function getRandomColor(): rgb {
+    const r = Math.floor( Math.random() * 255);
+    const g = Math.floor( Math.random() * 255);
+    const b = Math.floor( Math.random() * 255);
+
+    return [r,g,b]
 }
 
-const authorOne: Author = {name:"Aung Aung", avarter:"./img/avartar1.png"}
+const getColorOne = getRandomColor();
+const getColorTwo = getRandomColor();
+console.log(getColorOne, getColorTwo);
 
-interface Post {
-    title: string
-    body: string
-    tags: string[]
-    create_At: Date
-    author: Author
+//example 2 -> object literal
+
+type User = {
+    name : string
+    score: number
 }
 
-const newPost: Post = {
-    title: 'my first post',
-    body: 'this is the post interesting',
-    tags: ['gaming','tech'],
-    create_At: new Date(),
-    author: authorOne,
+const userOne: User = { name:'Aung', score:95}
+
+function formatUser(user:User) :void {
+    console.log(`${user.name} has score of ${user.score}`);
 }
 
-//as function argument types
-function createPost(post: Post): void{
-    console.log(`Create post ${post.title} by ${post.author.name}`);
-    
-}
-
-createPost(newPost);
-
-//with array
-const posts: Post[] = []
-posts.push(newPost)
+formatUser(userOne)
+formatUser({name:"Mike",score:80})
